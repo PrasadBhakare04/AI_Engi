@@ -33,6 +33,7 @@ for prompt in prompts :
     }
 
     messages = [message]   
+    #one more parameter max_tokens=100 for limiting the usage of tokens
     response = client.chat.completions.create(model = model, messages=messages)
     usage = response.usage
     print(f"Prompt: {prompt} --> your tokens: {usage.prompt_tokens} completion_tokens: {usage.completion_tokens}")
