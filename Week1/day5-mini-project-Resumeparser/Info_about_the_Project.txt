@@ -1,0 +1,28 @@
+job = Job(**job_data) //produces pydantic object which has to be converted into json string before passing using job.model_dump_json(indent=2)
+it is same for all of the schemas
+
+Schemas- 
+
+job description 
+resume - all the necessary details
+matching result - score 
+		  details is a dictionary which will contain the name skills phone email etc which was mentioned in the prompt inside final score function and the reason why it was selected
+
+LLM calls-
+
+1st LLM call
+	convert the job description into a json format which we are storing in job_data then we are creating an object of Job class
+	job_data = json.loads(response)
+	job = Job(**job_data) //produces pydantic object which has to be converted into json string before passing using job.model_dump_json(indent=2)
+        //So that we can access the contents of it
+
+2nd LLM call
+	convert the resume into the json format
+	resume_data = json.loads(response)
+	parsed_resume = Resume(**resume_data)
+
+3rd LLM call 
+	data passed = parsed_resume, job
+	match the skills and give scores and add details into the dictionary
+	adding the details into the dictionary is done by the prompt 
+
