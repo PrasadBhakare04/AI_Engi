@@ -1,0 +1,11 @@
+Week 1:
+Day 0: Installation and Setup
+Day 1: First LLM call and understanding the response 
+Day 2: System Role and Temperature
+Day 3: Tokens
+Day 4: Formatting and Transforming the response using Pydantic and JSON
+Day 5: Making a mini Project - Resume Parser
+
+Week 2:
+Day 1: Prompt Engineering
+Day 2: ReAct Reasoning + Action (Adding your custom tools to use after reasoning)
