@@ -83,12 +83,14 @@ def run_agent(question):
             temperature=0
         )
 
-        tool_calls = response.choices[0].message.tool_calls
+        msg = response.choices[0].message
+        tool_calls = msg.tool_calls
         if not tool_calls:
-            print(response.choices[0].message.content)
+            print(msg.content)
             break
 
         print(tool_calls)
+        print("")
         for tool_call in tool_calls : 
             function_name = tool_call.function.name
             function_to_call = tools[function_name]
@@ -96,16 +98,26 @@ def run_agent(question):
             observation = function_to_call(**args_json)
             print(f"  -> Called {function_name}({args_json}) = {observation}")   
 
-        messages.append({
-            "role":"assistant",
-            "content" : str(tool_calls)
-        })
+            messages.append({
+                "role":"assistant",
+                "tool_calls": [
+                    {
+                        "id": tool_call.id,
+                        "type": "function",
+                        "function": {
+                            "name": tool_call.function.name,
+                            "arguments": tool_call.function.arguments,
+                        },
+                    }
+                ]
+            })
 
-        messages.append({
-            "role":"user",
-            "content" : f"Observation {observation}"
-        })
-        sleep(5)
+            messages.append({
+                "role":"tool",
+                "tool_call_id":tool_call.id,
+                "content" : f"Observation {observation}"
+            })
+            sleep(5)
 
 
 
