@@ -4,6 +4,8 @@ from docx import Document
 import json
 from util import Resume
 
+global_context = []
+
 def read_pdf(file_path):
     reader = PdfReader(file_path)
     text = ""
@@ -90,6 +92,29 @@ def parse_resume(resume):
     }
     response=client.chat.completions.create(model=model, messages=messages, response_format=response_format)
     raw_output = response.choices[0].message.content
+    global_context.append({
+        "role" : "assistant",
+        "content" : raw_output
+    })
     data = json.loads(raw_output)
     resume = Resume(**data)
     return resume
+
+def ask_question(question):
+    user_message = {
+        "role" : "user",
+        "content" : f"{question}"
+    }
+
+    messages = [user_message]
+    messages = messages.__add__(global_context)
+
+    response = client.chat.completions.create(model = model, messages = messages)
+    msg = response.choices[0].message.content
+
+    global_context.append({
+        "role" : "assistant",
+        "content" : msg
+    })
+
+    print(msg)
