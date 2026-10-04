@@ -1,9 +1,7 @@
-// ---- Edit these two lines ----
 const CANDIDATE_NAME = "Prasad Bhakare";
-const API_URL = "http://localhost:8000"; // where your FastAPI backend runs
+const API_URL = "http://localhost:8000"; 
 const PHONE = "+91 83809 42314";
 const EMAIL = "prasadwork.2004@gmail.com";
-// ------------------------------
 
 const SUGGESTIONS = [
   "Give me a short summary of your background",
