@@ -13,6 +13,8 @@ const SUGGESTIONS = [
 
 const $ = id => document.getElementById(id);
 const thread = $("thread"), form = $("form"), input = $("q"), sendBtn = $("send");
+const stopBtn = $("stop");
+let controller = null;
 
 $("phone").textContent = PHONE;
 $("phone").href = "tel:" + PHONE.replace(/[^+\d]/g, "");
@@ -43,75 +45,73 @@ async function ask(question){
   question = question.trim();
   if(!question) return;
 
-  $("chips").hidden = true;
-
   addMsg(question, "user");
 
   input.value = "";
-  sendBtn.disabled = input.disabled = true;
+  input.disabled = true;
+  sendBtn.hidden = true;
+  stopBtn.hidden = false;
 
+  controller = new AbortController();
   const typing = addTyping();
+  let answerElement = null;
 
   try{
     const res = await fetch(API_URL + "/chat", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({question})
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({question}),
+      signal: controller.signal
     });
 
-    if(!res.ok){
-      throw new Error("Server returned " + res.status);
-    }
+    if(!res.ok) throw new Error("Server returned " + res.status);
 
-    // Remove "thinking..."
     typing.remove();
+    answerElement = addMsg("", "bot");
 
-    // Create an empty bot message
-    const answerElement = addMsg("", "bot");
-
-    // Get stream reader
     const reader = res.body.getReader();
-
-    // Decode binary chunks
     const decoder = new TextDecoder();
 
     while(true){
-
       const { value, done } = await reader.read();
-
       if(done) break;
-
-      const chunk = decoder.decode(value, {
-        stream: true
-      });
-
-      answerElement.textContent += chunk;
-
+      answerElement.textContent += decoder.decode(value, { stream: true });
       thread.scrollTop = thread.scrollHeight;
     }
 
   }catch(err){
-
     typing.remove();
 
-    addMsg(
-      "Couldn't reach the server. Check that the backend is running at " +
-      API_URL +
-      " and that CORS is enabled.",
-      "bot error"
-    );
-
-    console.error(err);
+    if(err.name === "AbortError"){
+      // User pressed Stop: keep the partial answer, or note the stop if nothing arrived
+      if(answerElement && answerElement.textContent){
+        answerElement.textContent += " [stopped]";
+      }else{
+        if(answerElement) answerElement.remove();
+        addMsg("Response stopped.", "bot");
+      }
+    }else{
+      if(answerElement && !answerElement.textContent) answerElement.remove();
+      addMsg(
+        "Couldn't reach the server. Check that the backend is running at " +
+        API_URL + " and that CORS is enabled.",
+        "bot error"
+      );
+      console.error(err);
+    }
 
   }finally{
-
-    sendBtn.disabled = input.disabled = false;
+    controller = null;
+    stopBtn.hidden = true;
+    sendBtn.hidden = false;
+    input.disabled = false;
     input.focus();
-
   }
 }
+
+stopBtn.addEventListener("click", () => {
+  if(controller) controller.abort();
+});
 
 form.addEventListener("submit", e => {
   e.preventDefault();

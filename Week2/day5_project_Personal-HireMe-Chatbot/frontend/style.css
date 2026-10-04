@@ -150,6 +150,13 @@ header p{
   animation-delay:.3s
 }
 
+.stop{
+    background:transparent;color:var(--err);border:1px solid var(--err)
+}
+[hidden]{
+    display:none !important
+}
+
 @keyframes b{
   0%,80%,100%{opacity:.25}
   40%{opacity:1}

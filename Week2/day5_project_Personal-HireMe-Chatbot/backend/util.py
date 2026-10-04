@@ -135,7 +135,7 @@ def parse_resume(resume_text):
     return resume
 
 
-RESUME_PDF = Path("resume1.pdf")
+RESUME_PDF = Path("Prasad_Bhakare_Resume.pdf")
 RESUME_JSON = Path("resume1.json")
 def get_resume():
 
@@ -174,6 +174,8 @@ def ask_candidate(question, resume):
         5.Answer as if HR is interviewing this candidate
         6.Don't give answers in tabular format
         7.When someone asks about the project give the links to github also
+        8.When someone asks about my background note that i have completed by bachelor of Engineering in Information Technology in the year 2026
+        9.When someone asks a random question or random text like "dddd" or anything like give me a code for this and that just say "Sorry, I can't help you with that, I am here as an assistant of Prasad I can help you with information related to him"
     """
 
     response = client.chat.completions.create(
