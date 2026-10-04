@@ -73,8 +73,12 @@ class Resume(BaseModel):
 
 resume_schema = Resume.model_json_schema()
 
+class ChatRequest(BaseModel):
+    question : str
+
 
 def parse_resume(resume_text):
+    print("LLM called")
     system_prompt = f"""
     You are an expert resume parser.
 
@@ -129,3 +133,64 @@ def parse_resume(resume_text):
     data = json.loads(raw_output)
     resume = Resume(**data)
     return resume
+
+
+RESUME_PDF = Path("resume1.pdf")
+RESUME_JSON = Path("resume1.json")
+def get_resume():
+
+    # If JSON already exists, use it
+    if RESUME_JSON.exists():
+
+        with open(RESUME_JSON, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        return Resume(**data)
+
+    # Otherwise parse the PDF using LLM
+    text = read_resume(RESUME_PDF)
+    resume = parse_resume(text)
+
+    # Save parsed resume
+    with open(RESUME_JSON, "w", encoding="utf-8") as f:
+        json.dump(resume.model_dump(), f, indent=2)
+
+    return resume
+
+
+def ask_candidate(question, resume):
+    system_prompt = f"""
+        you are an ai assistant representing a job candidate.
+        Below is everything you know about the candidate.
+
+        {resume.model_dump_json(indent = 2)}
+
+        Rules:
+        1.Answer only using this information
+        2.Never hallucinate.
+        3.If information is unavailable,
+        say "I don't have enough information to answer that."
+        4.Be professional
+        5.Answer as if HR is interviewing this candidate
+        6.Don't give answers in tabular format
+        7.When someone asks about the project give the links to github also
+    """
+
+    response = client.chat.completions.create(
+        model = model,
+
+        messages = [
+            {
+                "role" : "system",
+                "content" : system_prompt
+            },
+
+            {
+                "role" : "user",
+                "content" : question
+            }
+        ], 
+        stream = True
+    )
+    
+    return response

@@ -1,0 +1,58 @@
+{
+  "name": "Prasad Bhakare",
+  "email": "prasadwork.2004@gmail.com",
+  "phone": "+91 8380942314",
+  "total_experience_years": null,
+  "skills": [
+    "Java",
+    "JavaScript",
+    "Python",
+    "Node.js",
+    "Express",
+    "REST API Development",
+    "HTML",
+    "CSS",
+    "ReactJS",
+    "Bootstrap",
+    "MongoDB",
+    "MySQL",
+    "OOP",
+    "Data Structures",
+    "Website Hosting",
+    "GitHub",
+    "API Testing",
+    "Debugging",
+    "PowerBI",
+    "Microsoft Azure",
+    "Mongoose",
+    "Passport.js",
+    "Cloudinary",
+    "EJS"
+  ],
+  "experiences": [
+    {
+      "company": "Kasnet Technologies Pvt Ltd.",
+      "role": "Intern",
+      "duration": "Jan 2025 \u2013 Feb 2025",
+      "description": "Analyzed company data and created dashboards using Microsoft PowerBI, helped improve strategies and business model. Gained knowledge about cloud solutions using Microsoft Azure.",
+      "skills_used": [
+        "PowerBI",
+        "Microsoft Azure"
+      ]
+    }
+  ],
+  "education": [
+    "B.E. Information Technology, Final Year, CGPA 8.83, Sinhgad Institute of Technology and Science (SITS), Pune, 2022\u20132026",
+    "Higher Secondary (XII), Maharashtra State Board, 2022, 67.50%",
+    "Secondary (X), Maharashtra State Board, 2020, 88.80%"
+  ],
+  "projects": [
+    "CampSites",
+    "Online Voting Booth",
+    "Personal Portfolio Website"
+  ],
+  "certifications": [
+    "Full Stack Web Development (Udemy)",
+    "Microsoft Azure"
+  ]
+}
