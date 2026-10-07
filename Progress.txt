@@ -11,3 +11,8 @@ Day 1: Prompt Engineering
 Day 2: ReAct Reasoning + Action (Adding your custom tools to use after reasoning like there are various tools extension for llms like gpt, etc)
 Day 3: Prompt Chaining (Breaking down big task into small task and performing them one at a time by calling the llm)
 Day 4: Streaming (Breaking the whole response into small chunks and printing them one by one instead of whole answer use-case is just to please the user)
+Day 5: Project - Hireme-chatbot (chatbot which first extracts the resume and store in a json file and gives answer to the questions from the resume, FAST Api)
+
+Week 3:
+Day 1: RAG - basic rag by matching the words from question and in the context
+Day 2: Embedding - converting the sentences into vectors used in RAG to avoid only text matching and allow meaning matching, sentence-transformer, numpy
