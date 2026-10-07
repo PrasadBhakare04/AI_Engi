@@ -1,0 +1,60 @@
+{
+  "name": "Prasad Bhakare",
+  "email": "prasadwork.2004@gmail.com",
+  "phone": "+91 8380942314",
+  "total_experience_years": null,
+  "skills": [
+    "Java",
+    "JavaScript (ES6+)",
+    "Node JS",
+    "Express",
+    "REST API Development",
+    "ReactJS",
+    "HTML",
+    "CSS",
+    "MongoDB",
+    "MySQL",
+    "Bootstrap",
+    "Object Oriented Programming (OOP)",
+    "Data Structures",
+    "Website Hosting",
+    "GitHub",
+    "API Testing and Debugging",
+    "Passport.js",
+    "Cloudinary",
+    "JWT-based Authentication",
+    "Middleware",
+    "Spring Boot",
+    "Git",
+    "Cloud Computing (Microsoft Azure)"
+  ],
+  "experiences": [
+    {
+      "company": "Kasnet Technologies Pvt Ltd",
+      "role": "Trainee",
+      "duration": "Jan 2025 \u2013 Feb 2025",
+      "description": "Built an interactive sales dashboard with bar charts, KPI cards, and trend visuals to represent pizza sales data; gained foundational knowledge of cloud computing concepts through Microsoft Azure and earned the AZ-900 certification.",
+      "skills_used": [
+        "Node JS",
+        "Express",
+        "REST API",
+        "Microsoft Azure"
+      ]
+    }
+  ],
+  "education": [
+    "Bachelor of Engineering in Information Technology | CGPA - 8.98 | Sinhgad Institute of Technology and Science, Narhe | 2022-2026",
+    "Higher Secondary (XII) \u2013 Maharashtra State Board | 2022 | 67.50%",
+    "Secondary (X) \u2013 Maharashtra State Board | 2020 | 88.80%"
+  ],
+  "projects": [
+    "CampSites",
+    "Online Voting Booth",
+    "RealKhabr",
+    "Personal Portfolio Website"
+  ],
+  "certifications": [
+    "Fullstack Web-Development (Udemy)",
+    "Microsoft Azure Fundamentals (AZ-900)"
+  ]
+}
