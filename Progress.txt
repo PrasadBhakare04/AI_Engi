@@ -15,4 +15,6 @@ Day 5: Project - Hireme-chatbot (chatbot which first extracts the resume and sto
 
 Week 3:
 Day 1: RAG - basic rag by matching the words from question and in the context
-Day 2: Embedding - converting the sentences into vectors used in RAG to avoid only text matching and allow meaning matching, sentence-transformer, numpy
+Day 2: Embedding - converting the sentences into vectors used in RAG to avoid only text matching and allow meaning matching, sentence-transformers, numpy
+Day 3: RAG with Embedding - matching the question vector to document vectors to get the most similar line and provide that as the context to LLM
+Day 4: Qdrant a vector db - used the db to store and query the vectors learnt, about points(id + actual_vector + payload), how to create the qdrant client and collections and arguments to pass (Distance, VectorParams, PointStruct)
